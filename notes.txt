@@ -1,0 +1,7 @@
+﻿mdl load ***.dll // 将 dll 加载到 DefaultDomain 中
+clr dialog // 查看所有的 AppDomain
+mdl load eZBM,,eZDomain // 将 dll 加载到非 DefaultDomain 的 AppDomain 中
+CLR UNLOAD DOMAIN eZDomain // 卸载非 DefaultDomain 的 AppDomain
+
+// 先卸载，再重新加载
+CLR UNLOAD DOMAIN eZDomain; mdl load eZBM,,eZDomain
