@@ -5,9 +5,9 @@ namespace eZBM.Examples
 {
     class CreateElement
     {
-        public static void LineAndLineString()
+        public static void LineAndLineString(string unparsed)
         {
-            Application app = Utilities.ComApp;
+            Bentley.Interop.MicroStationDGN.Application app = Bentley.MicroStation.InteropServices.Utilities.ComApp;
             Point3d startPnt = app.Point3dZero();
             Point3d endPnt = startPnt;
             startPnt.X = 10;
@@ -27,7 +27,7 @@ namespace eZBM.Examples
             app.ActiveModelReference.AddElement(oLine);
         }
 
-        public static void ShapeAndComplexShape()
+        public static void ShapeAndComplexShape(string unparsed)
         {
             Application app = Utilities.ComApp;
             Point3d[] pntArray = new Point3d[6];
@@ -56,7 +56,7 @@ namespace eZBM.Examples
             app.ActiveModelReference.AddElement(oComplexShape);
         }
 
-        public static void TextAndTextNode()
+        public static void TextAndTextNode(string unparsed)
         {
             Application app = Utilities.ComApp;
             double savedTextHeight = app.ActiveSettings.TextStyle.Height;
@@ -86,7 +86,7 @@ namespace eZBM.Examples
             app.ActiveSettings.AnnotationScaleEnabled = savedAnnotationScaleEnabled;
         }
 
-        public static void CellAndSharedCell()
+        public static void CellAndSharedCell(string unparsed)
         {
             Application app = Utilities.ComApp;
             app.AttachCellLibrary("sample2.cel");
@@ -112,7 +112,7 @@ namespace eZBM.Examples
             }
         }
 
-        public static void LinearAndAngularDimension()
+        public static void LinearAndAngularDimension(string unparsed)
         {
             Application app = Utilities.ComApp;
             DimensionStyle ds = app.ActiveSettings.DimensionStyle;
@@ -149,7 +149,7 @@ namespace eZBM.Examples
             app.ActiveModelReference.AddElement(oDim);
         }
 
-        public static void CurveAndBsplineCurve()
+        public static void CurveAndBsplineCurve(string unparsed)
         {
             Application app = Utilities.ComApp;
             Point3d[] pntArray = new Point3d[5];
@@ -175,7 +175,7 @@ namespace eZBM.Examples
             app.ActiveModelReference.AddElement(oBsplineCurve);
         }
 
-        public static void ConeAndBsplineSurface()
+        public static void ConeAndBsplineSurface(string unparsed)
         {
             Application app = Utilities.ComApp;
             Point3d basePt = app.Point3dFromXYZ(2, -23, 0);

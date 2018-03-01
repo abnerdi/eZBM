@@ -1,30 +1,26 @@
-﻿using System;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
+using eZBM.Examples;
 using BCOM = Bentley.Interop.MicroStationDGN;
 using BM = Bentley.MicroStation;
 using BMI = Bentley.MicroStation.InteropServices;
 
-namespace eZBM.Examples
+namespace eZBM
 {
     /// <summary>
     /// MicroStation looks for this class that is
     /// derived from Bentley.MicroStation.AddIn.
     /// </summary>
-    /// <remarks>要使一个.NET 程序集能够作为Addins 在Mstn 下运行，需要满足如下三个条件：
-    /// ①包含有一个派生于Bentley.MicroStation.Addin 的类；
-    /// ②该派生类必须提供一个单参数(IntPtr 类型的MDL 描述符)的构造函数，且该构造函数需要链接到基类构造函数上；
-    /// ③该派生类必须覆盖Addin 基类中的虚方法Run()。</remarks>
-    [BM.AddInAttribute(MdlTaskID = "csAddins")]
-    internal sealed class csAddins : BM.AddIn
+    [BM.AddInAttribute(MdlTaskID = "ProgramTest")]
+    internal sealed class ProgramTest : BM.AddIn
     {
-        public static csAddins MSAddin = null;
+        public static ProgramTest MSAddin = null;
         public static BCOM.Application MSApp = null;
 
         /// <summary>
         /// Private constructor required for all AddIn classes derived from 
         /// Bentley.MicroStation.AddIn.
         /// </summary>
-        private csAddins(IntPtr mdlDesc) : base(mdlDesc)
+        private ProgramTest(System.IntPtr mdlDesc) : base(mdlDesc)
         {
             MSAddin = this;
         }
@@ -37,9 +33,11 @@ namespace eZBM.Examples
         /// <returns>0 on success</returns>
         protected override int Run(string[] commandLine)
         {
-            MSApp = BMI.Utilities.ComApp;
-            MessageBox.Show(@"进入 csAddins ! Fullname: " + MSApp.FullName);
 
+            MSApp = Bentley.MicroStation.InteropServices.Utilities.ComApp;
+            // MessageBox.Show("进入 ProgramTest! fullname: " + MSApp.FullName);
+            CreateElement.LineAndLineString(null);
+            // MessageBox.Show(@"运行完成");
 
             //  Register reload and unload events, and show the form
             ReloadEvent += new ReloadEventHandler(PowerCivilAddin1_ReloadEvent);
@@ -51,7 +49,7 @@ namespace eZBM.Examples
         /// Static property that the rest of the application uses 
         /// get the reference to the AddIn.
         /// </summary>
-        internal static csAddins Addin
+        internal static ProgramTest Addin
         {
             get { return MSAddin; }
         }
@@ -89,6 +87,7 @@ namespace eZBM.Examples
             MessageBox.Show(@"ProgramTest Unloaded");
             //TODO: add specific handling For this Event here
         }
+
         /// <summary>
         /// Handles MDL ONUNLOAD requests when the application is being unloaded.
         /// </summary>
